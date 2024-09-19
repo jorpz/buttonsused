@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+    <title>Buttons Used Calculator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .top-row, .bottom-row {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 2.5em;
+            cursor: pointer;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top row for even-numbered buttons -->
+    <div class="top-row">
+        <div class="button" onclick="toggleButton(2)">
+            🟡
+            <input type="checkbox" id="button2" onchange="updateValue()">
+        </div>
+        <div class="button" onclick="toggleButton(4)">
+            🔵
+            <input type="checkbox" id="button4" onchange="updateValue()">
+        </div>
+        <div class="button" onclick="toggleButton(6)">
+            🔵
+            <input type="checkbox" id="button6" onchange="updateValue()">
+        </div>
+        <div class="button" onclick="toggleButton(8)">
+            🟡
+            <input type="checkbox" id="button8" onchange="updateValue()">
+        </div>
+    </div>
+
+    <!-- Bottom row for odd-numbered buttons -->
+    <div class="bottom-row">
+        <div class="button" onclick="toggleButton(1)">
+            ⚪
+            <input type="checkbox" id="button1" onchange="updateValue()">
+        </div>
+        <div class="button" onclick="toggleButton(3)">
+            🟢
+            <input type="checkbox" id="button3" onchange="updateValue()">
+        </div>
+        <div class="button" onclick="toggleButton(5)">
+            🔴
+            <input type="checkbox" id="button5" onchange="updateValue()">
+        </div>
+        <div class="button" onclick="toggleButton(7)">
+            🟢
+            <input type="checkbox" id="button7" onchange="updateValue()">
+        </div>
+        <div class="button" onclick="toggleButton(9)">
+            ⚪
+            <input type="checkbox" id="button9" onchange="updateValue()">
+        </div>
+    </div>
+
+    <div class="output">
+        <pre>&lt;used_keys __type="u16"&gt;<span id="result">0</span>&lt;/used_keys&gt;</pre>
+    </div>
+
+    <script>
+        function toggleButton(buttonNumber) {
+            const checkbox = document.getElementById(`button${buttonNumber}`);
+            checkbox.checked = !checkbox.checked;
+            updateValue();
+        }
+
+        function updateValue() {
+            let value = 0;
+
+            // Calculate the value based on the state of each button's checkbox
+            if (document.getElementById('button1').checked) value += 1;
+            if (document.getElementById('button2').checked) value += 2;
+            if (document.getElementById('button3').checked) value += 4;
+            if (document.getElementById('button4').checked) value += 8;
+            if (document.getElementById('button5').checked) value += 16;
+            if (document.getElementById('button6').checked) value += 32;
+            if (document.getElementById('button7').checked) value += 64;
+            if (document.getElementById('button8').checked) value += 128;
+            if (document.getElementById('button9').checked) value += 256;
+
+            // Update the display with the resulting value
+            document.getElementById('result').innerText = value;
+        }
+    </script>
+
+</body>
+</html>
